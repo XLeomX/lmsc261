@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<body>
+    <canvas width="600" height="600" id="canvas" style="width: 600px; height: 600px;"></canvas>
+</body>
+
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, h = canvas.height;
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width *= dpr, canvas.height *= dpr;
+    ctx.scale(dpr, dpr);
+
+
+    // Background
+    ctx.fillStyle = "#B3FF40";
+    ctx.fillRect(0, 0, w, h);
+
+
+    // Line 
+    const A = [w * 0.167, h * 0.167];
+    const B = [w * 0.667, h * 0.667];
+
+    ctx.beginPath();
+    ctx.moveTo(A[0], A[1]);
+    ctx.lineTo(B[0], B[1]);
+    ctx.strokeStyle = "#2925F5";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+
+    // Triangle 
+    const C = [w * 0.15, h * 0.5];
+    const D = [w * 0.5, h * 0.333];
+    const E = [w * 0.0833, h * 0.333];
+
+    ctx.beginPath();
+    ctx.moveTo(C[0], C[1]);
+    ctx.lineTo(D[0], D[1]);
+    ctx.lineTo(E[0], E[1]);
+    ctx.lineTo(C[0], C[1]);
+    ctx.strokeStyle = "#2925F5";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+
+    // Semicircle 
+    const F = [w * 0.667, h * 0.65];
+    const radiusA = w * 0.167;
+
+    ctx.beginPath();
+    ctx.arc(
+        F[0],
+        F[1],
+        radiusA,
+        Math.PI,
+        Math.PI * 2,
+        true
+    );
+
+    ctx.closePath();
+    ctx.fillStyle = "#2925F5";
+    ctx.lineWidth = 4;
+    ctx.fill();
+
+
+    // Circle 
+    const G = [w * 0.667, h * 0.333];
+    const radiusB = w * 0.0833;
+
+    ctx.beginPath();
+    ctx.arc(
+        G[0],
+        G[1],
+        radiusB,
+        0,
+        Math.PI * 2,
+        false
+    );
+
+    ctx.closePath();
+    ctx.strokeStyle = "#2925F5";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+</script>
