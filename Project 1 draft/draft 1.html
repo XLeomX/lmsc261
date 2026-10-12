@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <body>
     <canvas width="600" height="600" id="canvas" style="width: 600px; height: 600px;"></canvas>
@@ -12,75 +13,188 @@
     canvas.width *= dpr, canvas.height *= dpr;
     ctx.scale(dpr, dpr);
 
+    let x = 90;
+    let y = 100;
+    let x2 = 450;
+    let y2 = 400;
+    let x3 = w * 0.667;
+    let y3 = h * 0.65;
+    let speedX2 = -3;
+    let speedY2 = 2;
+    let speedX3 = 2;
+    let speedY3 = -2;
 
-    // Background
-    ctx.fillStyle = "#B3FF40";
+    let speedX = Math.random() * 4 + 1;
+    let speedY = Math.random() * 4 + 1;
+    let angle = 0;
+    let triangleX = 200;
+    let lineAngle = 0;
+    let semiAngle = 0;
+let triangleY = 200;
+
+let triangleSpeedX = 2;
+let triangleSpeedY = 3;
+
+    function draw() {
+
+        // Background
+        
+    ctx.fillStyle = "rgba(179, 255, 64, 0.05)";
     ctx.fillRect(0, 0, w, h);
 
 
-    // Line 
-    const A = [w * 0.167, h * 0.167];
-    const B = [w * 0.667, h * 0.667];
+        
+      // Line
+ctx.save();
 
-    ctx.beginPath();
-    ctx.moveTo(A[0], A[1]);
-    ctx.lineTo(B[0], B[1]);
-    ctx.strokeStyle = "#2925F5";
-    ctx.lineWidth = 4;
-    ctx.stroke();
+ctx.translate(250, 250);
+ctx.rotate(lineAngle);
 
+ctx.beginPath();
+ctx.moveTo(-150, -150);
+ctx.lineTo(150, 150);
 
-    // Triangle 
-    const C = [w * 0.15, h * 0.5];
-    const D = [w * 0.5, h * 0.333];
-    const E = [w * 0.0833, h * 0.333];
+ctx.strokeStyle = "#2925F5";
+ctx.lineWidth = 4;
+ctx.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(C[0], C[1]);
-    ctx.lineTo(D[0], D[1]);
-    ctx.lineTo(E[0], E[1]);
-    ctx.lineTo(C[0], C[1]);
-    ctx.strokeStyle = "#2925F5";
-    ctx.lineWidth = 4;
-    ctx.stroke();
+ctx.restore();
 
+        // Triangle
+       
+        ctx.save();
 
-    // Semicircle 
-    const F = [w * 0.667, h * 0.65];
-    const radiusA = w * 0.167;
+        ctx.translate(triangleX, triangleY);
+        ctx.rotate(angle);
 
-    ctx.beginPath();
-    ctx.arc(
-        F[0],
-        F[1],
-        radiusA,
-        Math.PI,
-        Math.PI * 2,
-        true
-    );
+        ctx.beginPath();
+        ctx.moveTo(-50, 50);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(0, -50);
+        ctx.closePath();
 
-    ctx.closePath();
-    ctx.fillStyle = "#2925F5";
-    ctx.lineWidth = 4;
-    ctx.fill();
+        ctx.strokeStyle = "#2925F5";
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        ctx.restore();
 
 
-    // Circle 
-    const G = [w * 0.667, h * 0.333];
-    const radiusB = w * 0.0833;
+      
 
-    ctx.beginPath();
-    ctx.arc(
-        G[0],
-        G[1],
-        radiusB,
-        0,
-        Math.PI * 2,
-        false
-    );
+       // Semicircle
+const F = [x3, y3];
+const radiusA = w * 0.167;
 
-    ctx.closePath();
-    ctx.strokeStyle = "#2925F5";
-    ctx.lineWidth = 4;
-    ctx.stroke();
+ctx.save();
+
+ctx.translate(F[0], F[1]);
+ctx.rotate(semiAngle);
+
+ctx.beginPath();
+ctx.arc(
+    0,
+    0,
+    radiusA,
+    Math.PI,
+    Math.PI * 2,
+    true
+);
+
+ctx.closePath();
+ctx.fillStyle = "#2925F5";
+ctx.fill();
+
+ctx.restore();
+
+        // Circle
+        const G = [x, y];
+        const radiusB = w * 0.0833;
+
+        ctx.beginPath();
+        ctx.arc(
+            G[0],
+            G[1],
+            radiusB,
+            0,
+            Math.PI * 2,
+            false
+        );
+
+        ctx.closePath();
+        ctx.strokeStyle = "#2925F5";
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+// Circle
+        const n = [x2, y2];
+        const radiusC = w * 0.0833;
+
+        ctx.beginPath();
+        ctx.arc(
+            n[0],
+            n[1],
+            radiusC,
+            0,
+            Math.PI * 2,
+            false
+        );
+
+        ctx.closePath();
+        ctx.strokeStyle = "#2925F5";
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+
+        // Animation
+        x = x + speedX;
+        y = y + speedY;
+
+        if (x + radiusB >= w || x - radiusB <= 0) {
+    speedX = -speedX;
+}
+
+if (y + radiusB >= h || y - radiusB <= 0) {
+    speedY = -speedY;
+}
+
+// Second Circle Animation
+x2 = x2 + speedX2;
+y2 = y2 + speedY2;
+
+if (x2 + radiusC >= w || x2 - radiusC <= 0) {
+    speedX2 = -speedX2;
+}
+
+if (y2 + radiusC >= h || y2 - radiusC <= 0) {
+    speedY2 = -speedY2;
+}
+
+// semisphere Animation
+x3 = x3 + speedX3;
+y3 = y3 + speedY3;
+if (x3 + radiusA >= w || x3 - radiusA <= 0) {
+    speedX3 = -speedX3;
+}
+if (y3 + radiusA >= h || y3 - radiusA <= 0) {
+    speedY3 = -speedY3;
+}
+    angle = angle + 0.01;
+    triangleX = triangleX + triangleSpeedX;
+    triangleY = triangleY + triangleSpeedY;
+    if (triangleX + 75 >= w || triangleX - 75 <= 0) {
+    triangleSpeedX = -triangleSpeedX;
+}
+
+if (triangleY + 75 >= h || triangleY - 75 <= 0) {
+    triangleSpeedY = -triangleSpeedY;
+}
+lineAngle = lineAngle + 0.01;
+semiAngle = semiAngle - 0.01;
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+
 </script>
+
