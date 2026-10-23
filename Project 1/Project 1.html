@@ -152,7 +152,6 @@
             if (x2 + radiusC >= w || x2 - radiusC <= 0) {
                 speedX2 = -speedX2;
             }
-
             if (y2 + radiusC >= h || y2 - radiusC <= 0) {
                 speedY2 = -speedY2;
             }
@@ -163,7 +162,7 @@
             semiAngle -= 0.01;
 
             if (x3 + radiusA >= w || x3 - radiusA <= 0) {
-                speedX3 = -speedX3;
+                speedX3 = -speedX3
             }
 
             if (y3 + radiusA >= h || y3 - radiusA <= 0) {
@@ -188,7 +187,7 @@
 
             requestAnimationFrame(draw);
         }
-
+    
         draw();
     </script>
 </body>
